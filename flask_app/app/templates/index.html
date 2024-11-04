@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Saved URLs</h1>
+    {% for url in urls %}
+    <div><p><b>Name: {{ url.name }}</b> | Short: {{ url.short }} | Original: {{ url.long }}</p></div>
+    {% endfor %}
+{% endblock %}
