@@ -1,4 +1,5 @@
-FROM cgr.dev/chainguard/python:latest-dev AS builder
+# OBS: using latest for POC purposes since other Chainguard images are paid. Do not use latest in production.
+FROM cgr.dev/chainguard/python:latest-dev AS builder 
 
 WORKDIR /app
 
@@ -37,5 +38,5 @@ ENV FLASK_APP=/app/shortly.py
 
 ENTRYPOINT ["./boot.sh"]
 
-HEALTHCHECK --interval=30s --timeout=1s \
+HEALTHCHECK --interval=30s --timeout=3s \
     CMD ["/usr/bin/wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:5000/healthcheck"] || exit 1
