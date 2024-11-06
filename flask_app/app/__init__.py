@@ -17,7 +17,7 @@ def create_app(config_class=Config):
     app.register_blueprint(main_bp)
     app.register_blueprint(cli_bp)
 
-    app.logger.setLevel(logging.INFO)
+    app.logger.setLevel(logging.DEBUG)
     app.logger.info('Application startup')
 
     return app

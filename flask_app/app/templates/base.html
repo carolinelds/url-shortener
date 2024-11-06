@@ -6,7 +6,9 @@
     <body>
         <div>
             Menu:
-            <a href="{{ url_for('main.index') }}">Home</a>
+            <a href="{{ url_for('main.index') }}">Home</a> | 
+            <a href="{{ url_for('main.convert') }}">Get Short URL</a> | 
+            <a href="{{ url_for('main.consult') }}">Get Original URL</a>
         </div>
         <hr>
         {% with messages = get_flashed_messages() %}

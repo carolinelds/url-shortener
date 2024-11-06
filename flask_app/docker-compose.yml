@@ -1,0 +1,51 @@
+services:
+  app:
+    build: .
+    labels:
+      com.docker.app: "Shortly"
+      com.docker.tier: "App"
+    env_file:
+      - .env
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+    deploy:
+      restart_policy:
+        condition: unless-stopped
+        delay: 60s
+      resources: 
+        reservations:
+          cpus: '0.1'
+          memory: 64M
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+    networks:
+      - app_network
+
+  postgres:
+    image: postgres:14.13
+    labels:
+      com.docker.app: "Shortly"
+      com.docker.tier: "Data"
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  app_network: {}

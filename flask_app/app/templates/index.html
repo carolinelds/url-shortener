@@ -3,6 +3,15 @@
 {% block content %}
     <h1>Saved URLs</h1>
     {% for url in urls %}
-    <div><p><b>Name: {{ url.name }}</b> | Short: {{ url.short }} | Original: {{ url.long }}</p></div>
+    <div>
+        <p>
+            <b>{{ url.name }}</b> | 
+            <a href="https://{{ url.original }}">{{ url.short }}</a> |
+            <button onclick="(async () => { 
+                await fetch('{{ url_for('main.delete_url', name=url.name) }}', { method: 'DELETE' });
+                window.location.reload(); // not checking for errors for simplicity
+            })()">Delete</button>
+        </p>
+    </div>
     {% endfor %}
 {% endblock %}

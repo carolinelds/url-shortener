@@ -1,18 +1,32 @@
-import requests
-import sqlalchemy as sa
-from flask import render_template, flash, redirect, url_for, jsonify, current_app, request, abort
+from flask import render_template
 from app.blueprints.main import bp
-from app.blueprints.main.api.errors import bad_request, internal_server_error
-from app.extensions import db
-from app.models.url import Url
+from app.blueprints.main.services import svc_get_urls, svc_add_url, svc_delete_url, svc_get_url
+
+# controllers and routes in the same place for simplicity
 
 @bp.route('/shorten', methods=['GET'])
 def get_urls():
-    try:
-        urls = Url.query.all()
-        urls_list = [url.to_dict() for url in urls]
-        return urls_list, 200
+    return svc_get_urls()
+
+
+@bp.route('/shorten', methods=['POST'])
+def add_url():
+    data = request.get_json()
+    return svc_add_url(data)
     
-    except Exception as e:
-        return internal_server_error(str(e))
+
+@bp.route('/shorten/<string:name>', methods=['DELETE'])
+def delete_url(name):
+    return svc_delete_url(name)
+
+
+@bp.route('/convert/<string:name>', methods=['GET'])
+def get_url(name):    
+    return svc_get_url(name)
+
+
+@bp.route('/healthcheck', methods=['GET'])
+def healthcheck():
+    response_data, response_status = svc_get_urls()
+    return 'OK', 200
 
