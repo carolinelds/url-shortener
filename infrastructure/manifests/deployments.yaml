@@ -1,0 +1,68 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: myapp
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+  namespace: myapp
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: myapp
+          image: 160885281351.dkr.ecr.us-east-1.amazonaws.com/dev-carolinelds-shortly-app:<update-with-tag-after-initial-push> # OBS
+          ports:
+            - name: flask
+              containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: app-secrets
+          resources:
+            requests:
+              memory: 64Mi
+              cpu: 100m
+            limits:
+              memory: 64Mi
+              cpu: 100m
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: myapp
+spec:
+  replicas: 1 # for POC purposes
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: 'postgres:14'
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: postgres-secrets
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgresdata
+      volumes:
+        - name: postgresdata
+          persistentVolumeClaim:
+            claimName: postgres-volume-claim
