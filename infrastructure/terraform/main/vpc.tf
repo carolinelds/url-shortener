@@ -55,11 +55,11 @@ module "vpc_endpoints" {
   security_group_rules = {
     ingress_https = {
       description = "HTTPS from subnets"
-      cidr_blocks = concat(module.vpc["${each.key}"].private_subnets_cidr_blocks, module.vpc["${each.key}"].database_subnets_cidr_blocks)
+      cidr_blocks = concat(module.vpc["${each.key}"].private_subnets_cidr_blocks)
     }
     ingress_http = {
       description = "HTTP from subnets"
-      cidr_blocks = concat(module.vpc["${each.key}"].private_subnets_cidr_blocks, module.vpc["${each.key}"].database_subnets_cidr_blocks)
+      cidr_blocks = concat(module.vpc["${each.key}"].private_subnets_cidr_blocks)
     }
   }
 }
