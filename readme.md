@@ -50,7 +50,18 @@ pip install -r requirements.txt
 sudo service postgresql start
 ```
 
-#### 1.1.2 Initializing the database
+#### 1.1.2 Configuring environment variables
+
+Copy the `.env.template` file to a new one called `.env` and add the needed values. To generate a secret key, you can run:
+
+```bash
+python3 -c "import uuid; print(uuid.uuid4().hex)"
+```
+
+Remember to use `DB_HOST=localhost`.
+
+
+#### 1.1.3 Initializing the database
 
 Still in `flask_app` directory, run:
 
@@ -60,16 +71,6 @@ flask createdb
 flask db migrate -m "url table"
 flask db upgrade
 ```
-
-#### 1.1.3 Configuring environment variables
-
-Copy the `.env.template` file to a new one called `.env` and add the needed values. To generate a secret key, you can run:
-
-```bash
-python3 -c "import uuid; print(uuid.uuid4().hex)"
-```
-
-Remember to use `DB_HOST=localhost`.
 
 #### 1.1.4 Run the application
 
