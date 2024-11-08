@@ -5,6 +5,7 @@ from app.blueprints.main.services import svc_get_urls, svc_add_url, svc_get_url
 from app.extensions import db
 from app.models.url import Url
 
+@bp.route('/', methods=['GET'])
 @bp.route('/view/index', methods=['GET'])
 def index():
     response_data, status_code = svc_get_urls()

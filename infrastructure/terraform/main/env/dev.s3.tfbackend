@@ -1,0 +1,6 @@
+bucket          = "tf-state-bucket-carolinelds-160885281351-dev"
+dynamodb_table  = "tf-state-lock-carolinelds-160885281351-dev"
+
+assume_role  = {
+    role_arn = "arn:aws:iam::160885281351:role/TerraformServiceRoleState"
+}

@@ -7,7 +7,7 @@ class Url(db.Model):
     __tablename__ = "url"
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     name: so.Mapped[str] = so.mapped_column(sa.String(64), index=True, unique=True)
-    original: so.Mapped[str] = so.mapped_column(sa.String(256), index=True, unique=False)
+    original: so.Mapped[str] = so.mapped_column(sa.String(512), index=True, unique=False)
     short: so.Mapped[str] = so.mapped_column(sa.String(64), index=True, unique=True)
 
     def __repr__(self):
