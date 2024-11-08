@@ -50,7 +50,7 @@ pip install -r requirements.txt
 sudo service postgresql start
 ```
 
-##### 1.1.2 Initializing the database
+#### 1.1.2 Initializing the database
 
 Still in `flask_app` directory, run:
 
@@ -61,7 +61,7 @@ flask db migrate -m "url table"
 flask db upgrade
 ```
 
-##### 1.1.3 Configuring environment variables
+#### 1.1.3 Configuring environment variables
 
 Copy the `.env.template` file to a new one called `.env` and add the needed values. To generate a secret key, you can run:
 
@@ -112,7 +112,7 @@ Initializing errors for the application are expected while the database is finis
 The application should now be available in `http://localhost:5000/`.
 
 
-#### 1.2.5 Stopping the application
+#### 1.2.4 Stopping the application
 
 You can type `ctrl+C` on the same terminal used to launch the application. Then run `docker compose down`.
 
