@@ -6,8 +6,8 @@ Author: Caroline Lopes dos Santos
 
 | Content | Description | Path | 
 | ---- | ---- | ---- |
-| General overview | Explanation about the application's architecture | This README file |
 | How to run | Instructions for how to configure the application both locally and on the cloud | This README file |
+| General overview | Explanation about the application's architecture | This README file |
 | Application | Simple application with Flask framework (I decided to challenge myself and this is my first Flask application). Encapsulates both a simple frontend and an API. | `flask_app/` | 
 | Baseline IaC | Creates Terraform state S3 bucket, DynamoDB lock table and Terraform service roles | `ìnfrastructure/terraform/baselines/` |
 | Main IaC | Creates EKS and associated resources | `ìnfrastructure/terraform/main/` |
@@ -16,7 +16,7 @@ Author: Caroline Lopes dos Santos
 | Images | The images used throughout this README file | `images/` |
 | Next steps | Suggestions of improvement and next steps to optimize even further the application | This README file |
 
-## 1. How to use
+## 1. How to run
 
 ### 1.1 Local application without containers
 
@@ -82,6 +82,8 @@ The application should now be available in `http://localhost:5000/`.
 
 You can type `ctrl+C` on the same terminal used to launch the application.
 
+-------
+
 ### 1.2 Local application with containers
 
 #### 1.2.1 Pre-requisites
@@ -117,8 +119,9 @@ The application should now be available in `http://localhost:5000/`.
 
 You can type `ctrl+C` on the same terminal used to launch the application. Then run `docker compose down`.
 
+-------
 
-### 1.3 Running the application in AWS
+### 1.3 Running the application in AWS EKS
 
 #### 1.3.1 Pre-requisites
 
@@ -214,6 +217,8 @@ After the WAF gets created, remember to copy its ARN and update the value in `in
 
 By now you should have a private application accessible on your custom domain only by the CIDRS you have whitelisted in `default.auto.tfvars`.
 
+-------
+
 ## 2. API General overview
 
 The API was developed using [Flask](https://flask.palletsprojects.com/en/stable/) framework, [PostgreSQL](https://www.postgresql.org/) for data persistence, and [SQLAlchemy](https://www.sqlalchemy.org/) as ORM.
@@ -253,6 +258,7 @@ The API architecture aims a balance between simplicity and best practices for AP
 - An ORM was used to improve management of migrations and other database operations. Database configuration was made in `app/extensions` since these are external modules to the application.
 - Models (`app/models/`) and views templates (`app/templates/`) are also present in the architecture.
 
+-------
 
 ## 3. Next steps
 
