@@ -5,7 +5,7 @@
 ### Pre-requisites
 
 1. Have a Terraform version manager installed (suggestion: https://github.com/tofuutils/tenv) in order to compy with `versions.tf` required Terraform version.
-2. SSO into a role that can assume both Terraform service roles that were created previously (i.e. in this case, an AdministratorAccess role).
+2. SSO into a role that can assume both Terraform service roles that were created previously (i.e. in this case, an AdministratorAccess role). Remember to select profile name as `admin` and run `export AWS_PROFILE=admin` at the end.
 
 ### Initializing an S3 Backend
 

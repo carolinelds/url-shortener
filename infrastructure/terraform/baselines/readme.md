@@ -15,7 +15,7 @@ If specific subsequent changes are to be made (e.g. update tags), the import blo
 ### Pre-requisites
 
 1. Have a Terraform version manager installed (suggestion: https://github.com/tofuutils/tenv) in order to compy with `versions.tf` required Terraform version.
-2. SSO into a role with at least S3, IAM and DynamoDB general permissions, since this code will be locally applied.
+2. SSO into a role with at least S3, IAM and DynamoDB general permissions, since this code will be locally applied. Remember to select profile name as `admin` and run `export AWS_PROFILE=admin` at the end.
 
 ### Initializing an S3 Backend
 
